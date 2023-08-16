@@ -1,6 +1,8 @@
 package com.mt.bot.easyBot.bot.commod;
 
 import com.mt.bot.easyBot.bot.RssSub;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
@@ -17,14 +19,17 @@ import java.util.List;
  *
  * @author Timo Schulz (Mit0x2)
  */
+@Component
 public class RssCommand extends BotCommand {
+
     /**
      * Construct
      */
     public RssCommand() {
         super("rss", "With this command you can sub the Rss");
     }
-
+    @Autowired
+    RssSub rssSub;
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
 
@@ -39,7 +44,7 @@ public class RssCommand extends BotCommand {
         }
 
 
-        List<String> list = RssSub.getRss(type, param);
+        List<String> list = rssSub.getRss(type, param);
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());

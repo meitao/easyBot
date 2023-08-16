@@ -5,12 +5,14 @@ import com.mt.bot.easyBot.bot.commod.*;
 import com.mt.bot.easyBot.common.Constants;
 import com.mt.bot.easyBot.common.Emoji;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -26,6 +28,10 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     public static final String LOGTAG = "COMMANDSHANDLER";
+    @Autowired
+    Constants constants;
+
+
 
     /**
      * Constructor.
@@ -64,8 +70,13 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
             log.info("  ----chatId:{}------", message.getChatId());
             //@Todo权限控制
             if (message.hasText()) {
-                send(message.getChatId(), "\"Hey heres your message:\\n\" "+ message.getText());
+                send(message.getChatId(), "\"Hey heres your message:\\n\" " + message.getText());
             }
+        } else if (update.hasCallbackQuery()) {
+            CallbackQuery callbackQuery = update.getCallbackQuery();
+            String data = callbackQuery.getData();
+            Message message = callbackQuery.getMessage();
+            send(message.getChatId(), "\"Hey heres your message:\\n\" " + data);
         }
     }
 
@@ -86,12 +97,12 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     @Override
     public String getBotToken() {
-        return Constants.BOT_TOKEN;
+        return constants.bot_token;
     }
 
     @Override
     public String getBotUsername() {
-        return Constants.BOT_USERNAME;
+        return constants.bot_username;
     }
 
 }

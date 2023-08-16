@@ -1,10 +1,12 @@
 package com.mt.bot.easyBot.bot.commod;
 
 import com.mt.bot.easyBot.bot.RssSub;
+import com.mt.bot.easyBot.common.Emoji;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
+import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.*;
@@ -35,10 +37,18 @@ public class StartCommand extends BotCommand {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         KeyboardRow row = new KeyboardRow();
+        KeyboardRow row1 = new KeyboardRow();
         keyboard.add(row);
+        keyboard.add(row1);
 
+        row1.add(  KeyboardButton.builder().text("test1").build() );
+
+        WebAppInfo webAppInfo =  WebAppInfo.builder()
+                .url("www.baidu.com")
+                .build();
         KeyboardButton keyboardButton = new KeyboardButton();
-        keyboardButton.setText("/help");
+        keyboardButton.setText("baidu");
+        keyboardButton.setWebApp(webAppInfo);
         row.add(keyboardButton);
 
 
@@ -57,13 +67,13 @@ public class StartCommand extends BotCommand {
         inlineKeyboards.add(keyboardButtonList);
         InlineKeyboardButton inlineKeyboardButton = InlineKeyboardButton.builder()
                 .callbackData("help")
-                .text("/help")
+                .text("help")
                 .build();
 
         InlineKeyboardButton stopinlineKeyboardButton = InlineKeyboardButton.builder()
                 .callbackData("stop")
-                .switchInlineQuery("/stop")
-                .text("/stop")
+                .switchInlineQuery("stop1")
+                .text("stop  "+ Emoji.HEAR_NO_EVIL_MONKEY)
                 .build();
 
 

@@ -24,18 +24,23 @@ import java.util.List;
 @Component
 public class RssSubBot extends TelegramLongPollingBot {
 
+    @Autowired
+    Constants constants;
+
+    @Autowired
+    RssSub rssSub;
     public RssSubBot(DefaultBotOptions botOptions) {
         super(botOptions);
     }
 
     @Override
     public String getBotUsername() {
-        return Constants.BOT_USERNAME;
+        return constants.bot_username;
     }
 
     @Override
     public String getBotToken() {
-        return Constants.BOT_TOKEN;
+        return constants.bot_token;
     }
 
     @Override
@@ -45,7 +50,7 @@ public class RssSubBot extends TelegramLongPollingBot {
             Message message = update.getMessage();
             Long chatId = message.getChatId();
             log.info("  ----chatId:{}------", chatId);
-            List<String> list = RssSub.getRss("weibo_hot", "");
+            List<String> list = rssSub.getRss("weibo_hot", "");
             send(chatId, list.get(0));
         }
 

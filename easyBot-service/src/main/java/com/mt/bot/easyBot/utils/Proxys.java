@@ -9,8 +9,8 @@ public class Proxys {
      * 获取代理
      * @return
      */
-    public static Proxy getProxy() {
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(PORXY_HOST, PORXY_PORT));
+    public static Proxy getProxy(String proxyHost,int port) {
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, port));
         return proxy;
     }
 }

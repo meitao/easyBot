@@ -1,15 +1,34 @@
 package com.mt.bot.easyBot.common;
 
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+
+@Component
+@ConfigurationProperties(prefix = "bot")
+@Data
 public class Constants {
-    public static final String PORXY_HOST ="localhost";
-    public static final int PORXY_PORT =7890;
+    public String getPorxy_host() {
+        return porxy_host;
+    }
 
-    public static final String BOT_TOKEN = "6244951583:AAFKEoo9BtfAMvmlXLaAu0wbMi7PKqwhlz4";
-    public static final String BOT_USERNAME = "@mt1FirstBot";
+    public void setPorxy_host(String porxy_host) {
+        this.porxy_host = porxy_host;
+    }
 
-    public static final String TWITTER_USER ="https://rsshub.app/twitter/user";
+    public String porxy_host;
 
-    public static final String WEIBO_HOT ="https://rsshub.app/weibo/search/hot";
+    public int porxy_port;
 
+    public String bot_token;
+    public String bot_username;
+
+    public String twitter_user;
+
+    public String weibo_hot;
+    public boolean isProxy;
 
 }
