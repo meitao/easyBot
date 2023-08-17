@@ -48,7 +48,7 @@ public class RssSub {
         }
 
         SyndFeed feed = null;
-        Proxy proxy = Proxys.getProxy(constants.porxy_host,constants.porxy_port);
+
         URL url1 = null;
         try {
             url1 = new URL(url);
@@ -57,7 +57,13 @@ public class RssSub {
         }
 
         try {
-            feed = new SyndFeedInput().build(new XmlReader(url1.openConnection(proxy)));
+            if(constants.isProxy){
+                Proxy proxy = Proxys.getProxy(constants.porxy_host,constants.porxy_port);
+                feed = new SyndFeedInput().build(new XmlReader(url1.openConnection(proxy)));
+            }else {
+                feed = new SyndFeedInput().build(new XmlReader(url1.openConnection()));
+            }
+
         } catch (FeedException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

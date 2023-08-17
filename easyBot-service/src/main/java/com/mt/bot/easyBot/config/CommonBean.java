@@ -14,9 +14,11 @@ public class CommonBean {
     @Bean
     public DefaultBotOptions defaultBotOptions() {
         DefaultBotOptions botOptions = new DefaultBotOptions();
-        botOptions.setProxyHost(constants.porxy_host);
-        botOptions.setProxyPort(constants.porxy_port);
-        botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
+        if(constants.isProxy){
+            botOptions.setProxyHost(constants.porxy_host);
+            botOptions.setProxyPort(constants.porxy_port);
+            botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
+        }
         return botOptions;
     }
 }

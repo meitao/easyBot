@@ -1,9 +1,7 @@
 package com.mt.bot.easyBot.common;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 
@@ -24,11 +22,13 @@ public class Constants {
     public int porxy_port;
 
     public String bot_token;
+
     public String bot_username;
 
     public String twitter_user;
 
     public String weibo_hot;
+
     public boolean isProxy;
 
 }
