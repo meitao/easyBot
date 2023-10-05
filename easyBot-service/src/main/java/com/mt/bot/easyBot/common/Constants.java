@@ -29,6 +29,6 @@ public class Constants {
 
     public String weibo_hot;
 
-    public boolean isProxy;
+    public boolean yn_Proxy;
 
 }

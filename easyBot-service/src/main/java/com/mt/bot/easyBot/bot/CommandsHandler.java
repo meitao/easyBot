@@ -6,17 +6,14 @@ import com.mt.bot.easyBot.common.Constants;
 import com.mt.bot.easyBot.common.Emoji;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 /**
  * This handler mainly works with commands to demonstrate the Commands feature of the API
@@ -28,6 +25,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     public static final String LOGTAG = "COMMANDSHANDLER";
+
     @Autowired
     Constants constants;
 
@@ -37,15 +35,22 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      * Constructor.
      */
 
-    public CommandsHandler(DefaultBotOptions botOptions) {
+    public CommandsHandler(DefaultBotOptions botOptions, JikeqCommand jikeqCommand, RssCommand rssCommand
+            , JkqRegisterSSCommand jkqRegisterCommand
+            , JkqRegisterNOCommand jkqRegisterNOCommand
+            , JkqRegisterYYCommand jkqRegisterYYCommand) {
         super(botOptions);
 
         HelpCommand helpCommand = new HelpCommand(this);
 
-        register(new HelloCommand());
-        register(new StartCommand());
-        register(new StopCommand());
-        register(new RssCommand());
+//        register(new HelloCommand());
+//        register(new StartCommand());
+//        register(new StopCommand());
+        register(rssCommand);
+        register(jikeqCommand);
+        register(jkqRegisterCommand);
+        register(jkqRegisterNOCommand);
+        register(jkqRegisterYYCommand);
         register(helpCommand);
 
         registerDefaultAction((absSender, message) -> {

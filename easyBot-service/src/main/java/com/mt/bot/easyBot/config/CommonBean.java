@@ -14,7 +14,7 @@ public class CommonBean {
     @Bean
     public DefaultBotOptions defaultBotOptions() {
         DefaultBotOptions botOptions = new DefaultBotOptions();
-        if(constants.isProxy){
+        if(constants.yn_Proxy){
             botOptions.setProxyHost(constants.porxy_host);
             botOptions.setProxyPort(constants.porxy_port);
             botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);

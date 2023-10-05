@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.mt.bot.easyBot.common.Constants.*;
-
 /**
  * @author tao.mei
  * @description
@@ -57,7 +55,7 @@ public class RssSub {
         }
 
         try {
-            if(constants.isProxy){
+            if(constants.yn_Proxy){
                 Proxy proxy = Proxys.getProxy(constants.porxy_host,constants.porxy_port);
                 feed = new SyndFeedInput().build(new XmlReader(url1.openConnection(proxy)));
             }else {
